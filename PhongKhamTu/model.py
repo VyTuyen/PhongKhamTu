@@ -21,20 +21,19 @@ class NguoiDung(db.Model):
     dsdatlich = relationship('DSDatLich', backref='nguoidung', lazy=True)
     hoadon = relationship('HoaDon', backref='nguoidung', lazy=True)
     phieukham = relationship('PhieuKham', backref='nguoidung', lazy=True)
-class DSDatLich(db.Model):
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    ngayKham = Column(Date, primary_key=True,nullable=False)
-    benhnhan = relationship('BenhNhan', backref='dsdatlich', lazy=True)
-    nguoidung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=False)
-
 class BenhNhan(db.Model):
     id =Column(Integer, primary_key=True, autoincrement=True)
     hoten =Column(String(50),nullable=False)
     namsinh =Column(Integer)
     diachi =Column(String(100))
     sdt =Column(Integer,unique=True)
-    dsdatlich_id =Column(Integer,ForeignKey(DSDatLich.id))
+    dsdatlich = relationship('DSDatLich', backref='benhnhan', lazy=True)
     hoadon = relationship('HoaDon', backref='benhnhan', lazy=True)
+class DSDatLich(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ngayKham = Column(Date, primary_key=True,nullable=False)
+    benhnhan_id = Column(Integer, ForeignKey(BenhNhan.id))
+    nguoidung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=False)
 
 class PhieuKham(db.Model):
     __tablename__= 'phieukham'
