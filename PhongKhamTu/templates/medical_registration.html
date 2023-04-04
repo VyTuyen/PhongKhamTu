@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-login" style="margin:50px auto; width:500px; height:550px;">
+    <h1 class="text-center text-primary">ĐĂNG KÝ KHÁM BỆNH</h1>
+    {% if msg %}
+    <div class="alert alert-danger">
+        {{ msg }}
+    </div>
+    {% endif %}
+    <form action="/register" method="post" enctype="multipart/form-data">
+        <div class="mb-3 mt-3">
+            <label for="name" class="form-label">Họ tên:</label>
+            <input type="text" class="form-control" id="name"
+                   placeholder="Họ tên" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="confirm" class="form-label">Giới tính</label>
+            <input type="password" class="form-control" id="confirm"
+                   placeholder="Giới tính" name="confirm">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="username" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="username"
+                   placeholder="Số điện thoại" name="username">
+        </div>
+        <div class="mb-3">
+            <label for="pwd" class="form-label">Năm sinh</label>
+            <input type="password" class="form-control" id="pwd"
+                   placeholder="dd/mm/yyyy" name="password">
+        </div>
+        <div class="mb-3">
+            <label for="confirm" class="form-label">Địa chỉ</label>
+            <input type="password" class="form-control" id="dress"
+                   placeholder="Địa chỉ" name="confirm">
+        </div>
+        <button type="submit" class="btn btn-primary">Đăng ký</button>
+    </form>
+</div>
+{% endblock %}

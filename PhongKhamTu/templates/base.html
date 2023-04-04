@@ -8,33 +8,44 @@
 
 </head>
 <body class="bg-light">
-    <h1 align="center"></h1>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">PHÒNG KHÁM TƯ</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="/">Trang chủ</a>-->
-<!--                    </li>-->
-                    {% for cate in categories %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">{{cate.name}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+<h1 align="center"></h1>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">GOOD HEALTHY</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/medical_registration">Đăng ký khám bệnh</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Đăng ký</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Đăng nhập</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
     {% block content %}
     {% endblock %}
-    <div class="mt-4 p-5 bg-dark text-white rounded">
-        <h1>Phòng Khám Tư Ba Cô Gái</h1>
-        <p> Tổng đài 0271200010 </p>
-        <p>Địa chỉ: 1 Nguyễn Oanh, phường 16, quận Gò Vấp, TP.HCM</p>
-    </div>
+<footer class="text-center text-lg-start bg-light text-muted">
+  <div class="text-center p-4 bg-dark">
+    © 2023 Private Clinic:
+    <a class="text-reset fw-bold" href="https://GOLDHEALTH.com/">goldhealth.com</a>
+  </div>
+</footer>
+
+<!--    <div class="mt-4 bg-dark text-white rounded">-->
+<!--        <div class="container">-->
+<!--&lt;!&ndash;            #chừa 1 khoảng trắng&ndash;&gt;-->
+<!--&lt;!&ndash;            <h3>Phòng Khám Tư Ba Cô Gái</h3>&ndash;&gt;-->
+<!--            <p> Tổng đài 0271200010 </p>-->
+<!--            <p>Địa chỉ: 1 Nguyễn Oanh, phường 16, quận Gò Vấp, TP.HCM</p>-->
+<!--        </div>-->
+<!--    </div>-->
 </body>
 </html>
