@@ -12,9 +12,3 @@ def auth_user(User,Password):
     return NguoiDung.query.filter(NguoiDung.Username.__eq__(User),
                              NguoiDung.Password.__eq__(Password)).first()
 
-
-def add_user(name, username, password, avatar=''):
-    password = str(hashlib.md5(password.encode('utf-8')).hexdigest())
-    u = NguoiDung(name=name, username=username, password=password, avatar=avatar)
-    db.session.add(u)
-    db.session.commit()

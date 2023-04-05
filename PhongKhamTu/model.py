@@ -7,17 +7,18 @@ class UseRole(UserEnum):
     admin=1
     doctor = 2
     nurse=3
+    cashier =4
+
 
 class NguoiDung(db.Model):
     id =Column(Integer, primary_key=True, autoincrement=True)
     hoten =Column(String(50),nullable=False)
     usename =Column(String(50),nullable=False,unique=True)
     password = Column(String(20), nullable=False)
-    avatar =Column(String(100))
     email =Column(String(20))
+    ngaythamgia = Column(Date)
     active =Column(Boolean,default=True)
-    ngayThamGia = Column(Date)
-    capBac = Column(Enum(UseRole))
+    capbac = Column(Enum(UseRole))
     dsdatlich = relationship('DSDatLich', backref='nguoidung', lazy=True)
     hoadon = relationship('HoaDon', backref='nguoidung', lazy=True)
     phieukham = relationship('PhieuKham', backref='nguoidung', lazy=True)
@@ -31,7 +32,7 @@ class BenhNhan(db.Model):
     hoadon = relationship('HoaDon', backref='benhnhan', lazy=True)
 class DSDatLich(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ngayKham = Column(Date, primary_key=True,nullable=False)
+    ngayKham = Column(Date,nullable=False)
     benhnhan_id = Column(Integer, ForeignKey(BenhNhan.id))
     nguoidung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=False)
 
@@ -47,8 +48,8 @@ class PhieuKham(db.Model):
     nguoidung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=False)
 class HoaDon(db.Model):
     id =Column(Integer, primary_key=True, autoincrement=True)
-    tienThuoc =Column(Float)
-    tienKham = Column(Float)
+    tienthuoc =Column(Float)
+    tienkham = Column(Float)
     tongtien = Column(Float)
     trangthai =Column(Boolean, default=False)
     nguoidung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=False)
@@ -75,7 +76,7 @@ class ChiTietDonThuoc(db.Model):
 class DonViThuoc(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     donvi =Column(String(20), unique=True)
-    thuoc_id = Column(Integer, ForeignKey(Thuoc.id), nullable=False)
+    thuoc_id = Column(Integer, ForeignKey(Thuoc.id),nullable=False)
 class LoaiThuoc(db.Model):
     __tablename__= 'loaithuoc'
     id = Column(Integer, primary_key=True, autoincrement=True)

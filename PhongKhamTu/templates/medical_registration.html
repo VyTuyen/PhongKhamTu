@@ -26,8 +26,13 @@
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">Năm sinh</label>
-            <input type="password" class="form-control" id="pwd"
-                   placeholder="dd/mm/yyyy" name="password">
+            <!--            <input type="password" class="form-control" id="pwd"-->
+            <!--                   placeholder="dd/mm/yyyy" name="password">-->
+            <form action="/action_page.php">
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday">
+                <input type="submit">
+            </form>
         </div>
         <div class="mb-3">
             <label for="confirm" class="form-label">Địa chỉ</label>
