@@ -1,30 +1,22 @@
 from flask import render_template, redirect,request
 from PhongKhamTu import app, admin,dao, controllers,utils
 from flask_login import login_user, logout_user
+from PhongKhamTu.model import UserRole
 
-# app.add_url_rule('/', 'index', controllers.index, methods=['get', 'post'])
 @app.route("/")
 def index():
     return render_template("index.html")
-@app.route("/medical_registration")
-def my_registration():
-    return render_template("medical_registration.html")
-@app.route("/login")
-def my_login():
-    return render_template("login.html")
-@app.route("/login", methods=['post'])
-def my_login_process():
-    Username = request.form['username']
-    Password = request.form['password']
-    u = dao.auth_user(Username, Password)
-    if u:
-        login_user(user=u)
-        next_page = request.args.get('next')
-        return redirect(next_page if next_page else '/')
-    return render_template('login.html')
-@app.route("/logout")
-def my_logout():
-    logout_user()
-    return redirect("/login")
+@app.route("/register")
+def my_register():
+    return render_template('register.html')
+# @app.route("/admin-login",methods=['post'])
+# def signin_admin():
+#     username = request.form['username']
+#     password = request.form['password']
+#
+#     user = dao.check_login(username=username, password=password, role=UserRole.ADMIN)
+#     if user:
+#         login_user(user=user)
+#     return redirect('/admin')
 if __name__ == '__main__':
     app.run(debug=True)

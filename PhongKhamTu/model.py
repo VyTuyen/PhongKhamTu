@@ -15,7 +15,7 @@ class BaseModel(db.Model):
     __abstract__= True
     id = Column(Integer, primary_key=True, autoincrement=True)
 class User(BaseModel, UserMixin):
-    hoten = Column(String(50), nullable=False)
+    name = Column(String(50), nullable=False)
     username = Column(String(50), nullable=False, unique=True)
     password = Column(String(50), nullable=False)
     email = Column(String(100), nullable=False)
@@ -89,8 +89,81 @@ class ChiTietDonThuoc(db.Model):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
-        # c1 = BenhNhan(HoTen='Trần Anh Tú', NamSinh='1997', DiaChi='Cà Mau', SDT='0372319888')
-        # c2 = BenhNhan(HoTen='Nguyễn Hoài Nam',NamSinh='1990', DiaChi='TPHCM', SDT='0386548732')
-        # db.session.add_all([c1,c2])
-        # db.session.commit()
+        # db.create_all()
+        u1 = DonViThuoc(name='Chai')
+        u2 = DonViThuoc(name='Vỹ')
+        u3 = DonViThuoc(name='Viên')
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.add(u3)
+
+        c1 = LoaiThuoc(name='Say xe')
+        c2 = LoaiThuoc(name='Đau bụng')
+        c3 = LoaiThuoc(name='Nhức đầu')
+        c4 = LoaiThuoc(name='Canxi')
+        db.session.add(c1)
+        db.session.add(c2)
+        db.session.add(c3)
+        db.session.add(c4)
+
+
+        t1 = Thuoc(name='diphenhydramine', donViThuoc_id=3,loaiThuoc_id=1, giaThuoc=5000,
+                   CachSD='Uống trước khi khởi hàng 30 phút', )
+        t2 = Thuoc(name='dimenhydrinate', donViThuoc_id=3,loaiThuoc_id=2, giaThuoc=6000,
+                   CachSD='Uống trước khi khởi hàng 30 phút', )
+        t3 = Thuoc(name='cinnarizine', donViThuoc_id=3,loaiThuoc_id=3, giaThuoc=7000,
+                   CachSD='Uống trước khi khởi hàng 30 phút', )
+        t4 = Thuoc(name='meclizine', donViThuoc_id=3,loaiThuoc_id=1, giaThuoc=8000,
+                   CachSD='Uống trước khi khởi hàng 30 phút', )
+        t5 = Thuoc(name='Ostelin Vitamin D3 & Calcium.', donViThuoc_id=3,loaiThuoc_id=3, giaThuoc=10000,
+                   CachSD='Uống vào buổi sáng', )
+        t6 = Thuoc(name="Calcium Magnesium Zinc của Nature's Bounty", donViThuoc_id=3,loaiThuoc_id=2, giaThuoc=12000,
+                   CachSD='Uống vào buổi sáng', )
+        t7 = Thuoc(name='Total Calcium Magnesium + D3.', donViThuoc_id=3,loaiThuoc_id=2,giaThuoc=15000,
+                   CachSD='Uống vào buổi sáng', )
+        t8 = Thuoc(name='Kirkland Calcium 600mg + D3', donViThuoc_id=1,loaiThuoc_id=1, giaThuoc=18000,
+                   CachSD='Uống vào buổi sáng', )
+        t9 = Thuoc(name='nizatidine (Axid)', donViThuoc_id=2, loaiThuoc_id=1,giaThuoc=50000,
+                   CachSD='Uống sau khi ăn', )
+        t10 = Thuoc(name='famotidine (Pepcid, Pepcid AC)', donViThuoc_id=3,loaiThuoc_id=3, giaThuoc=180000,
+                    CachSD='Uống sau khi ăn', )
+        t11 = Thuoc(name='cimetidine (Tagamet, Tagamet HB)', donViThuoc_id=1,loaiThuoc_id=2,
+                    giaThuoc=18000, CachSD='Uống sau khi ăn')
+        db.session.add(t1)
+        db.session.add(t2)
+        db.session.add(t3)
+        db.session.add(t4)
+        db.session.add(t5)
+        db.session.add(t6)
+        db.session.add(t7)
+        db.session.add(t8)
+        db.session.add(t9)
+        db.session.add(t10)
+        db.session.add(t11)
+
+        # user1 = User(name='admin', username='admin', password='123456',
+        #              email='thuy11@gmail.com',
+        #              user_role='1')
+        #
+        # user2 = User(name='tuyen', username='tuyen', password='123',
+        #              email='tuyennlv@gmail.com',
+        #              user_role='2')
+        #
+        # user3 = User(name='staff', username='staff', password='123',
+        #              email='ngan@gmail.com',
+        #              user_role='3')
+        #
+        # user4 = User(name='doctor', username='doctor', password='123',
+        #              email='tuyennlv@gmail.com',
+        #              user_role='4')
+        #
+        # user5 = User(name='nurse', username='nurse', password='123',
+        #              email='kimngan@gmail.com',
+        #              user_role='5')
+        # db.session.add(user1)
+        # db.session.add(user2)
+        # db.session.add(user3)
+        # db.session.add(user4)
+        # db.session.add(user5)
+        #
+        db.session.commit()
