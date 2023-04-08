@@ -1,7 +1,9 @@
-from flask_admin import Admin
+from flask import redirect
+from flask_admin import Admin, expose,BaseView
 from flask_admin.contrib.sqla import ModelView
 from PhongKhamTu import app, db
 from PhongKhamTu.model import User,DanhSachDatLich,Thuoc,DonViThuoc,LoaiThuoc
+from flask_login import current_user,logout_user
 
 class ListDetailView(ModelView):
     can_create = False
@@ -67,7 +69,14 @@ class MedicineView(ModelView):
     }
     form_columns = ['name','donViThuoc_id','giaThuoc','CachSD','loaiThuoc_id']
     form_excluded_columns = ['phieuKhamBenh']
+class LogoutView(BaseView):
+    @expose('/')
+    def index(self):
+        logout_user()
+        return redirect('/admin')
 
+    def is_accessible(self):
+        return current_user.is_authenticated
 class UserView(ModelView):
     can_view_details = True
     can_export = True
@@ -92,5 +101,6 @@ admin.add_view(UnitView(DonViThuoc, db.session, name='Đơn vị tính', categor
 admin.add_view(CateView(LoaiThuoc, db.session, name='Loại thuốc', category='Quản lý thuốc'))
 
 admin.add_view(UserView(User, db.session, name='Người dùng'))
+admin.add_view(LogoutView(name='Đăng xuất'))
 
 
