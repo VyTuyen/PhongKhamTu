@@ -9,9 +9,4 @@ app.config["SQLALCHEMY_DATABASE_URI"] ="mysql+pymysql://root:%s@localhost/phongk
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
 db = SQLAlchemy(app)
-<<<<<<< HEAD
 login_manager = LoginManager(app=app)
-=======
-login_manager = LoginManager(app=app)
-
->>>>>>> c742fa719d8ffa1e1e5c999c866f59d3bb8270b7
