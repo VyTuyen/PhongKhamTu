@@ -23,4 +23,8 @@ app.add_url_rule("/register", "register", controllers.register, methods=['get', 
 # app.add_url_rule("/staff_logout", "staff_logout", controllers.staff_logout)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+    app.run(debug=True)
+>>>>>>> c742fa719d8ffa1e1e5c999c866f59d3bb8270b7
