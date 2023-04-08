@@ -87,6 +87,9 @@ class ChiTietDonThuoc(db.Model):
     def __str__(self):
         return self.phieuKhamBenh_id.__str__()
 
+
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

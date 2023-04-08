@@ -1,5 +1,8 @@
-from flask_admin import Admin
+from flask import redirect
+from flask_admin import Admin, BaseView, expose
 from flask_admin.contrib.sqla import ModelView
+from flask_login import logout_user, current_user
+
 from PhongKhamTu import app, db
 from PhongKhamTu.model import User,DanhSachLichKham,DanhSachDatLich, HoaDon,Thuoc,DonViThuoc,ChiTietDonThuoc, PhieuKhamBenh,LoaiThuoc
 
@@ -16,6 +19,15 @@ class ListDetailView(ModelView):
     column_exclude_list = ['user']
     form_excluded_columns = ['user']
 
+
+class LogoutView(BaseView):
+    @expose('/')
+    def index(self):
+        logout_user()
+        return redirect('/admin')
+
+    def is_accessible(self):
+        return current_user.is_authenticated
 # class PhieuKhamView(ModelView):
 #     can_view_details = True
 #     can_export = True
@@ -106,7 +118,7 @@ admin= Admin(app,name='QUẢN LÝ PHÒNG KHÁM', template_mode='bootstrap4')
 
 admin.add_view(ListDetailView(DanhSachDatLich, db.session, name='Danh sách đặt lịch', category='Quản lý danh sách khám'))
 admin.add_view(UserView(User, db.session, name='Người dùng'))
-
+admin.add_view(LogoutView(name='Đăng xuất'))
 # admin.add_view(LichKhamView(DanhSachLichKham,db.session,name="Lịch khám bệnh",category='Khám bệnh'))
 #
 # admin.add_view(PhieuKhamView(PhieuKhamBenh,db.session, name="Phiếu khám bệnh", category='Quản lý khám bệnh'))

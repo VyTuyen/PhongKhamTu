@@ -1,10 +1,19 @@
-# from PhongKhamTu.model import  BenhNhan, DSDatLich, PhieuKham, ChiTietDonThuoc, HoaDon, Thuoc
-# from PhongKhamTu import db
-# from sqlalchemy import func, extract
-# from flask_login import current_user
-#
-#
-# def add_patient(hoten,sdt, namsinh, diachi ):
-#     b = BenhNhan(hoten=hoten.strip(), sdt=sdt.strip(), namsinh=namsinh.strip(), diachi=diachi.strip())
-#     db.session.add(b)()
-#     db.session.commit()
+from PhongKhamTu import dao
+
+
+def count_cart(cart):
+    total_amount = 0
+
+    if cart:
+        for c in cart.values():
+            total_amount += c['soLuong'] * c['giaThuoc']
+
+    return total_amount
+
+
+def total_bill(month):
+    total = 0
+    month_stats = dao.bill_stats(month)
+    for s in month_stats:
+        total = total + s[1]
+    return total
