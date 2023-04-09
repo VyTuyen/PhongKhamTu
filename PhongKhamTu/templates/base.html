@@ -14,7 +14,7 @@
 <h1 align="center"></h1>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">GOLD HEALTH</a>
+        <a class="navbar-brand" href="/">GOLD HEALTH</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,10 +22,10 @@
             <ul class="navbar-nav">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a href="/booking" class="nav-link px-4 text-dark">Đặt Lịch Khám</a>
+                     <a class="nav-link text-danger" href="/booking">Đặt lịch khám</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-danger" href="/logout">Đăng xuất</a>
+                    <a class="nav-link " href="/logout">Đăng xuất</a>
                 </li>
             </ul>
             {% else %}

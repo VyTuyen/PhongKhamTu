@@ -1,13 +1,18 @@
-from flask import redirect
+from datetime import datetime
+from flask import redirect,request
 from flask_admin import Admin, BaseView, expose
 from flask_admin.contrib.sqla import ModelView
-from PhongKhamTu import app, db
-from PhongKhamTu.model import User,DanhSachDatLich,Thuoc,DonViThuoc,LoaiThuoc
+from PhongKhamTu import app, db,dao
+from PhongKhamTu.model import User,DanhSachDatLich,Thuoc,DonViThuoc,LoaiThuoc,UserRole
 from flask_login import current_user,logout_user
-
-class ListDetailView(ModelView):
+class AuthenticatedModelView(ModelView):
+    column_display_pk = False
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.user_role.__eq__(UserRole.ADMIN)
+class ListDetailView(AuthenticatedModelView):
     can_create = False
     edit_modal = True
+    can_view_details = True
     column_labels = {
         'tenBN': 'Tên bệnh nhân',
         'gioiTinh': 'Giới tính',
@@ -18,7 +23,7 @@ class ListDetailView(ModelView):
     }
     column_exclude_list = ['user'] #ẩn cột
     form_excluded_columns = ['user'] #ẩn cột ở form
-class UnitView(ModelView):
+class UnitView(AuthenticatedModelView):
     column_display_pk = True #hiển thị khoá chính
     can_view_details = True
     can_export = True
@@ -30,8 +35,8 @@ class UnitView(ModelView):
         'id': 'Mã đơn vị',
         'name': 'Tên đơn vị'
     }
-    # form_excluded_columns = ['medicines']
-class CateView(ModelView):
+    form_excluded_columns = ['medicines']
+class CateView(AuthenticatedModelView):
     column_display_pk = True
     can_view_details = True
     can_export = True
@@ -43,8 +48,8 @@ class CateView(ModelView):
         'id': 'Mã loại thuốc',
         'name': 'Tên loại thuốc'
     }
-    # form_excluded_columns = ['medicine']
-class MedicineView(ModelView):
+    form_excluded_columns = ['medicine']
+class MedicineView(AuthenticatedModelView):
     column_display_pk = True
     can_view_details = True
     can_export = True
@@ -75,7 +80,7 @@ class LogoutView(BaseView):
 
     def is_accessible(self):
         return current_user.is_authenticated
-class UserView(ModelView):
+class UserView(AuthenticatedModelView):
     can_view_details = True
     can_export = True
     create_modal = True
@@ -89,6 +94,26 @@ class UserView(ModelView):
         'user_role': 'Quyền',
         'joined_date': 'Ngày tạo'
     }
+class Stats(BaseView):
+    @expose('/')
+    def index(self):
+        month = request.args.get('month', datetime.now().month)
+        kw = request.args.get('kw')
+        id = request.args.get('id')
+        return self.render('admin/stats.html',
+                           medi_month_stats=dao.medicine_month_stats(kw=kw, id=id, month=month)
+        )
+
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.user_role.__eq__(UserRole.ADMIN)
+
+
+class MyAdminIndexView(AuthenticatedModelView):
+    @expose('/')
+    def index(self):
+        total = 0
+        month = request.args.get('month', datetime.now().month)
+        return self.render('admin/index.html', month_stats=dao.bill_stats(month), total=dao.total_bill(month))
 
 admin= Admin(app,name='QUẢN LÝ PHÒNG KHÁM', template_mode='bootstrap4')
 
@@ -99,5 +124,6 @@ admin.add_view(UnitView(DonViThuoc, db.session, name='Đơn vị tính', categor
 admin.add_view(CateView(LoaiThuoc, db.session, name='Loại thuốc', category='Quản lý thuốc'))
 
 admin.add_view(UserView(User, db.session, name='Người dùng'))
+admin.add_view(Stats(name='Thống kê - báo cáo'))
 admin.add_view(LogoutView(name='Đăng xuất'))
 

@@ -70,8 +70,6 @@ class PhieuKhamBenh(BaseModel):
 
     def __str__(self):
         return self.id.__str__()
-
-
 class HoaDon(BaseModel):
     tenHD = Column(String(100), nullable=False)
     ngayLapHD = Column(DateTime, default=datetime.now())
@@ -86,9 +84,6 @@ class ChiTietDonThuoc(db.Model):
     phieuKhamBenh_id = Column(Integer, ForeignKey(PhieuKhamBenh.id), nullable=False, primary_key=True)
     def __str__(self):
         return self.phieuKhamBenh_id.__str__()
-
-
-
 
 if __name__ == '__main__':
     with app.app_context():
