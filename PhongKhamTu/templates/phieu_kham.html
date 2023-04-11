@@ -13,9 +13,6 @@
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-light text-dark">
     <div class="container-fluid">
-        <img class="logo_image" src="{{url_for('static',filename='/image/logo.png')}}">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
@@ -47,11 +44,11 @@
     <div class="col-md-1"></div>
     <div class="col-md-10 ">
         <div class="container">
-            <h1 class="text-center">Lập phiếu khám</h1>
+            <h1 class="text-center">LẬP PHIẾU KHÁM</h1>
             {% if err_msg %}
             <h1 class="text-danger">Bị Lỗi: {{ err_msg}}</h1>
             {% endif %}
-              {% if msg_success %}
+            {% if msg_success %}
             <h1 class="text-info">{{ msg_success }}</h1>
             {% endif %}
             <form method="post" action="/add-phieu-kham">
@@ -83,8 +80,8 @@
 
                     <tr class="row">
                         <td class="col-md-5">
-                            <select class="medicine form-control" onchange="addToCart(0)" >
-                                <option value="0">Select</option>
+                            <select class="medicine form-control" onchange="addToCart(0)">
+                                <option value="0">Thuốc</option>
                                 {% for m in Thuoc %}
                                 <option class="form-control" value="{{m.id}}" name="name" id="cart{{m.id}}">{{ m.name
                                     }}
@@ -96,7 +93,22 @@
                         <td class="col-md-3">
                             <div class="CachSD "></div>
                         </td>
-
+<!--                        <td class="col-md-2">-->
+<!--                            <select class="medicine form-control" onchange="addToCart(1)">-->
+<!--                                <option value="1">Đơn vị</option>-->
+<!--                                {% for dv in DonViThuoc %}-->
+<!--                                <option class="form-control" value="{{dv.id}}" name="donvi">{{ dv.name }}</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>-->
+<!--                        </td>-->
+<!--                        <td class="col-md-3">-->
+<!--                            <select class="medicine form-control" onchange="addToCart(2)">-->
+<!--                                <option value="2">Cách dùng</option>-->
+<!--                                {% for m in Thuoc %}-->
+<!--                                <option class="form-control" value="{{m.id}}" name="CachSD">{{ m.CachSD }}</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>-->
+<!--                        </td>-->
                         <td class="col-md-2">
                             <div class="form-group">
                                 <input class="form-control" type="number" value="1" name="quantity" min="1"
@@ -104,24 +116,21 @@
                                        style="width:100px"/>
                             </div>
                         </td>
-                        <!--                <td>-->
-                        <!--                    <input class="btn btn-danger" value="Xóa" type="button" onclick="deleteMedicineCart({{i}})"/>-->
-                        <!--                </td>-->
                     </tr>
                     </tbody>
                 </table>
-                <input type="button" value="Them" class="btn btn-info" onclick="addMedicine()"/>
+                <input type="button" value="Thêm" class="btn btn-info" onclick="addMedicine()"/>
                 <input type="submit" value="Lưu phiếu" class="btn btn-info" onclick="saveMedicalBill()"/>
             </form>
         </div>
     </div>
     <div class="col-md-1"></div>
 </div>
-<div class="row" >
-   <div class="col-md-12">
+<div class="row">
+    <div class="col-md-12">
         <form methods='post' action="/api/timKiem">
             <div class="container">
-                <h1 class="text-center">Danh Sách Thuốc Kê Toa</h1>
+                <h1 class="text-center">DANH SÁCH THUỐC KÊ TOA</h1>
                 <div class="form-group" style="margin-top:30px; display:flex">
                     <label for="fullname">Tên bệnh nhân</label>
                     <input type="text" name="fullname" id="fullname" class="form-control"/>
@@ -129,7 +138,7 @@
                 </div>
                 <p></p>
                 <table class="table" id="dsachThuoc" style="display:none">
-                    <tbody >
+                    <tbody>
 
                     </tbody>
                 </table>
@@ -138,18 +147,18 @@
     </div>
 </div>
 {% else %}
-<div class="container">
-    <h1 class="text-center">Đăng nhập</h1>
+<div class="container" style="margin:50px auto; width:500px; height:450px;">
+    <h1 class="text-center">ĐĂNG NHẬP</h1>
     {% if err_msg %}
     <h4 class="alter alter-danger">Error: {{err_msg}}</h4>
     {% endif %}
 
     <form method="post" action="/doctor-login">
-        <div class="form-group">
+        <div class="mb-3 mt-3">
             <label for="username">Tên đăng nhập</label>
             <input type="text" name="username" required id="username" class="form-control"/>
         </div>
-        <div class="form-group">
+        <div class="mb-3 mt-3">
             <label for="password">Mật khẩu</label>
             <input type="password" name="password" required id="password" class="form-control"/>
         </div>
@@ -175,11 +184,11 @@ function addMedicine() {
     <table><tr class="row">
             <td class="col-md-5">
                 <select class="medicine form-control" onchange="addToCart(${length})" >
-                    <option value="0">Select</option>
+                    <option value="0">Thuốc</option>
                     ${thuoc}
                 </select>
-            </td>
-            <td class="unit col-md-2"></td>
+             </td>
+             <td class="unit col-md-2"></td>
             <td class="col-md-3">
                 <div class="CachSD "></div>
             </td>
@@ -196,6 +205,7 @@ function addMedicine() {
     parser = parser.firstElementChild.firstElementChild
     tbody.append(parser)
 }
+
 
 </script>
 </body>

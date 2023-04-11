@@ -70,7 +70,7 @@ def get_medicine_by_id(id):
 
 def add_medical_bill(fullname, ngay_lap, chan_doan, trieu_chung, cart):
     print(fullname, ngay_lap, chan_doan, trieu_chung)
-    print('cart: ', cart)
+    print('cart:', cart)
     medicinal_bill = PhieuKhamBenh(fullname=fullname,
                                    ngaylap=ngay_lap,
                                    chanDoan=chan_doan,
@@ -134,15 +134,14 @@ def reload_state_pay(bill_id):
 
 
 def medicine_month_stats(month, kw=None, id=None):
-    p = db.session.query(Thuoc.id, Thuoc.name, DonViThuoc.name, ChiTietDonThuoc.soLuong)\
-                    .join(ChiTietDonThuoc, ChiTietDonThuoc.Thuoc_id.__eq__(Thuoc.id), isouter=True)\
-                    .join(PhieuKhamBenh, PhieuKhamBenh.id.__eq__(ChiTietDonThuoc.phieuKhamBenh_id))\
-                    .join(DonViThuoc, Thuoc.donViThuoc_id.__eq__(DonViThuoc.id)) \
-                    .join(HoaDon, HoaDon.phieuKhamBenh_id.__eq__(PhieuKhamBenh.id)) \
-                    .filter(extract('month', HoaDon.ngayLapHD) == month) \
-                    .group_by(Thuoc.id, Thuoc.name) \
-                    .order_by(ChiTietDonThuoc.soLuong)
-
+    p = db.session.query(Thuoc.id, Thuoc.name, DonViThuoc.name, ChiTietDonThuoc.soLuong) \
+        .join(ChiTietDonThuoc, ChiTietDonThuoc.Thuoc_id.__eq__(Thuoc.id), isouter=True) \
+        .join(PhieuKhamBenh, PhieuKhamBenh.id.__eq__(ChiTietDonThuoc.phieuKhamBenh_id)) \
+        .join(DonViThuoc, Thuoc.donViThuoc_id.__eq__(DonViThuoc.id)) \
+        .join(HoaDon, HoaDon.phieuKhamBenh_id.__eq__(PhieuKhamBenh.id)) \
+        .filter(extract('month', HoaDon.ngayLapHD) == month) \
+        .order_by(ChiTietDonThuoc.soLuong)
+        # .group_by(Thuoc.id, Thuoc.name)
     if kw:
         p = p.filter(Thuoc.name.contains(kw))
     if id:
@@ -160,4 +159,4 @@ def timKiem(fullname):
 
 if __name__=="__main__":
     with app.app_context():
-        print(timKiem(fullname="Võ Thànnh Tính"))
+        print(timKiem(fullname="Nguyễn Lê Vy Tuyền"))

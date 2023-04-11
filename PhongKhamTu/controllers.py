@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, session, jsonify
 from flask_login import login_user, logout_user
 from PhongKhamTu import app, dao, admin
 from PhongKhamTu.decorators import annonynous_user
-from PhongKhamTu.model import UserRole, Thuoc, HoaDon
+from PhongKhamTu.model import UserRole, Thuoc, HoaDon,DonViThuoc
 def home():
     return render_template("index.html")
 def booking():
@@ -95,7 +95,8 @@ def doctor_login():
             err_msg = 'Tên đăng nhập hoặc mật khẩu không chính xác!!!'
 
     medicine = Thuoc.query.order_by(Thuoc.name).all()
-    return render_template('phieu_kham.html', err_msg=err_msg, msg_success=msg_success, Thuoc=medicine)
+    donvi = DonViThuoc.query.order_by(DonViThuoc.name).all()
+    return render_template('phieu_kham.html', err_msg=err_msg, msg_success=msg_success, Thuoc=medicine, DonViThuoc=donvi)
 def doctor_logout():
     logout_user()
     return redirect('/doctor-login')
@@ -160,7 +161,7 @@ def add_medicine_to_cart():
         'CachSD': p.CachSD,
         'thuoc_id': p.id
     })
-@annonynous_user
+# @annonynous_user
 def staff_login():
     err_msg = ''
     if request.method.__eq__('POST'):
@@ -174,7 +175,7 @@ def staff_login():
         else:
             err_msg = 'Tên đăng nhập hoặc mật khẩu không chính xác!!!'
 
-    return render_template('bill.html', err_msg=err_msg)
+    return render_template('hoadon.html', err_msg=err_msg)
 def staff_logout():
     logout_user()
     return redirect("/staff_login")
@@ -182,8 +183,8 @@ def bills_staff():
     hoadon = HoaDon.query.all()
     medicine_bill_id = request.form.get('medicine_bill_id')
     if medicine_bill_id:
-        return render_template('bill.html', bills=dao.search_medicine_bill_by_id(medicine_bill_id))
-    return render_template('bill.html', bills=hoadon)
+        return render_template('hoadon.html', bills=dao.search_medicine_bill_by_id(medicine_bill_id))
+    return render_template('hoadon.html', bills=hoadon)
 def pay():
     data = request.json
     id = str(data.get('id'))

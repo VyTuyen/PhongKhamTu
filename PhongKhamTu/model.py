@@ -164,4 +164,7 @@ if __name__ == '__main__':
         # db.session.add(user4)
         # db.session.add(user5)
         #
+        # v1 = ChiTietDonThuoc(soLuong='10', Thuoc_id='2', phieuKhamBenh_id='5')
+        # db.session.add(v1)
+        # db.session.commit()
         # db.session.commit()
