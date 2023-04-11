@@ -23,9 +23,7 @@
 
 
 {% if current_user.is_authenticated %}
-<!--<h1 class="text-center text-info">TRANG CHỦ QUẢN TRỊ</h1>-->
 <h1 class="text-center text-danger">THỐNG KÊ DOANH THU</h1>
-<p></p>
 <div class="row">
     <div class="col-md-5 col-sm-12">
         <table class="table">
@@ -38,7 +36,7 @@
             {% for s in month_stats %}
             <tr>
                 <td>{{ s[0] }}</td>
-                <td>{{ s[2] }}</td>
+                <td>{{ s[1] }}</td>
                 <td>{{ "{:,.0f}".format(s[1]) }}</td>
                 <td>{{s[3]}}</td>
             </tr>

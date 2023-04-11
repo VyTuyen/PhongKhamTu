@@ -33,7 +33,7 @@ def book_schedule():
         except Exception as err:
             err_msg = " Hệ thống báo lỗi " + str(err)
         else:
-            msg_success = "Đặt lịch thành công"
+            msg_success = "Đặt lịch thành công!!!!"
     return render_template('booking.html', err_msg=err_msg, msg_success=msg_success,full_patient=full_patient)
 
 

@@ -10,6 +10,7 @@ class AuthenticatedModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.user_role.__eq__(UserRole.ADMIN)
 class ListDetailView(AuthenticatedModelView):
+    can_export = True
     can_create = False
     edit_modal = True
     can_view_details = True

@@ -168,3 +168,33 @@ if __name__ == '__main__':
         # db.session.add(v1)
         # db.session.commit()
         # db.session.commit()
+        # l1 = DanhSachDatLich(tenBN='Nguyễn Trung Ha',gioiTinh='Nam',namSinh='2000',SDT='03333333976',diaChi='VietNam',user_id='2',DSLichKham_id='1')
+        # l2 = DanhSachDatLich(tenBN='Nguyễn Trung Ha', gioiTinh='Nam', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='2', DSLichKham_id='1')
+        # l3 = DanhSachDatLich(tenBN='Nguyễn Tiên', gioiTinh='Nữ', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='3', DSLichKham_id='1')
+        # l4 = DanhSachDatLich(tenBN='Nguyễn Tá', gioiTinh='Nam', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='2', DSLichKham_id='1')
+        # l5 = DanhSachDatLich(tenBN='Nguyễn Ha', gioiTinh='Nam', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='3', DSLichKham_id='1')
+        # l6 = DanhSachDatLich(tenBN='Nguyễn Tí', gioiTinh='Nam', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='1', DSLichKham_id='1')
+        # l7 = DanhSachDatLich(tenBN='Nguyễn Trung Ha', gioiTinh='Nữ', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='2', DSLichKham_id='1')
+        # l8 = DanhSachDatLich(tenBN='Nguyễn Trung H', gioiTinh='Nữ', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='2', DSLichKham_id='1')
+        # l9 = DanhSachDatLich(tenBN='Nguyễn Trung', gioiTinh='Nữ', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='3', DSLichKham_id='1')
+        # l10 = DanhSachDatLich(tenBN='Nguyễn Tèo', gioiTinh='Nam', namSinh='2000', SDT='03333333976',
+        #                      diaChi='VietNam', user_id='2', DSLichKham_id='1')
+        # db.session.add(l1)
+        # db.session.add(l2)
+        # db.session.add(l3)
+        # db.session.add(l4)
+        # db.session.add(l5)
+        # db.session.add(l6)
+        # db.session.add(l7)
+        # db.session.add(l8)
+        # db.session.add(l9)
+        # db.session.add(l10)
+        # db.session.commit()
